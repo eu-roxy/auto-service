@@ -1,0 +1,32 @@
+
+
+<div class="container" *ngIf="client && client.vehicles">
+
+  <div class="row">
+    <h2 class="text-center">{{ client.firstName }} {{ client.lastName }} have {{ client.vehicles.length }} vehicles</h2>
+  </div>
+
+  <div class="row">
+    <ng-template ngFor [ngForOf]="client.vehicles" let-vehicle>
+        <div class="col-md-4">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{ vehicle.model }}</mat-card-title>
+              <mat-card-subtitle> ID: {{ vehicle.id }} </mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="vehicle.image" alt="{{vehicle.model}}" width="150px" height="150px">
+            <mat-card-content>
+              <p>Year: {{ vehicle.year }}</p>
+              <p>Km: {{ vehicle.km }}</p>
+
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button color="primary">EDIT</button>
+              <button mat-button color="warn">DELETE</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </ng-template>
+  </div>
+</div>

@@ -1,3 +1,6 @@
+import { RouterModule } from '@angular/router';
+import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.component';
+import { VehiclesContainerComponent } from './containers/vehicles-container/vehicles-container.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddEditClientComponent } from './components/add-edit-client/add-edit-client.component';
 import { NgModule } from '@angular/core';
@@ -6,6 +9,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardContainerComponent } from './containers/dashboard-container/dashboard-container.component';
@@ -21,17 +26,21 @@ import { CommonModule } from '@angular/common';
     DashboardComponent,
     ClientsContainerComponent,
     ClientsTableComponent,
-    AddEditClientComponent
+    AddEditClientComponent,
+    VehiclesContainerComponent,
+    VehiclesListComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     HttpClientModule,
     MatTableModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ],
   providers: []
 })

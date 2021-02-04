@@ -1,3 +1,4 @@
+import { VehiclesContainerComponent } from './views/service/containers/vehicles-container/vehicles-container.component';
 import { ClientsContainerComponent } from './views/service/containers/clients-container/clients-container.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -17,7 +18,11 @@ const routes: Routes = [
         path: 'clients',
         component: ClientsContainerComponent
       },
-      { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
+      {
+        path: 'client/:clientId/vehicles',
+        component: VehiclesContainerComponent
+      },
+      // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
