@@ -1,34 +1,36 @@
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-</mat-form-field>
-<div class="example-button-container">
-  <button mat-mini-fab color="primary" aria-label="Add client">
-    <mat-icon>add</mat-icon>
-  </button>
+<div class="mat-header-container">
+  <mat-form-field class="filter-width">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" #input>
+  </mat-form-field>
+  <div class="example-button-container add-button-container">
+    <button mat-mini-fab color="primary" aria-label="Add client" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!-- Position Column -->
+  <!-- First Name Column -->
   <ng-container matColumnDef="firstName">
     <th mat-header-cell *matHeaderCellDef> First Name </th>
     <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
   </ng-container>
 
-  <!-- Name Column -->
+  <!-- Last Name Column -->
   <ng-container matColumnDef="lastName">
     <th mat-header-cell *matHeaderCellDef> Last Name </th>
     <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
+  <!-- Email Column -->
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef> Email </th>
     <td mat-cell *matCellDef="let element"> {{element.email}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!-- Actions Column -->
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>  </th>
     <td mat-cell *matCellDef="let element">

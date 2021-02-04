@@ -1,12 +1,25 @@
-<h1 mat-dialog-title>Hi {{data.firstName}}</h1>
+<h1 mat-dialog-title>{{ dialogTitle }}</h1>
+
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <mat-form-field class="row-container">
+    <mat-label>First Name</mat-label>
+    <input matInput type="text" [(ngModel)]="data.firstName">
+  </mat-form-field>
   <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.firstName">
+    <mat-label>Last Name</mat-label>
+    <input matInput type="text" [(ngModel)]="data.lastName">
+  </mat-form-field>
+  <mat-form-field class="row-container">
+    <mat-label>Address</mat-label>
+    <input matInput type="text" [(ngModel)]="data.address">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Email</mat-label>
+    <input matInput type="email" [(ngModel)]="data.email">
   </mat-form-field>
 </div>
+
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.id" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button  cdkFocusInitial (click)="addOrUpdateClient(data)">{{ dialogActionButtonTitle }}</button>
 </div>

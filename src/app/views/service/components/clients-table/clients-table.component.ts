@@ -28,14 +28,10 @@ export class ClientsTableComponent implements OnChanges {
     }
   }
 
-  openDialog(client: ClientInterface): void {
+  openDialog(client?: ClientInterface): void {
     const dialogRef = this.dialog.open(AddEditClientComponent, {
-      width: '250px',
-      data: client
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      width: '500px',
+      data: client ? client : null
     });
   }
 
