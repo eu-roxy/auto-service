@@ -1,3 +1,4 @@
+import { CoreServices } from './core/core.services';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -16,7 +17,8 @@ import { ServiceModule } from './views/service/service.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    ServiceModule
+    ServiceModule,
+    CoreServices
   ],
   providers: [],
   bootstrap: [AppComponent]
