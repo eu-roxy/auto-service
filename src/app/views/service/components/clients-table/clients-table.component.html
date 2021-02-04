@@ -35,7 +35,12 @@
       <div class="example-button-row">
         <div class="example-flex-container">
           <div class="example-button-container">
-            <button mat-mini-fab color="primary" aria-label="Edit client">
+            <button mat-mini-fab color="link" aria-label="Client profile">
+              <mat-icon>list</mat-icon>
+            </button>
+          </div>
+          <div class="example-button-container">
+            <button mat-mini-fab color="primary" aria-label="Edit client" (click)="openDialog(element)">
               <mat-icon>edit</mat-icon>
             </button>
           </div>
