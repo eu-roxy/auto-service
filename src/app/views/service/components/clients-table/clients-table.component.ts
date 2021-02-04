@@ -15,6 +15,7 @@ export class ClientsTableComponent implements OnChanges {
 
   @Input() public clients: ClientInterface[] = [];
   @Output() public deleteClientEvent: EventEmitter<number> = new EventEmitter();
+  @Output() public dataChanged: EventEmitter<void> = new EventEmitter();
 
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'actions'];
   dataSource = new MatTableDataSource();
@@ -32,6 +33,9 @@ export class ClientsTableComponent implements OnChanges {
     const dialogRef = this.dialog.open(AddEditClientComponent, {
       width: '500px',
       data: client ? client : null
+    });
+    dialogRef.componentInstance.dataChanged.subscribe(() => {
+      this.dataChanged.emit();
     });
   }
 

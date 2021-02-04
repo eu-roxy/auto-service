@@ -11,7 +11,7 @@ for (let i = 1; i <= 20; i++) {
   database.clients.push({
     id: i,
     firstName: faker.name.findName(),
-    lastName: faker.name.jobTitle(),
+    lastName: faker.name.findName(),
     email: faker.internet.email(),
     address: faker.address.streetAddress(),
     imageUrl: faker.image.avatar(),

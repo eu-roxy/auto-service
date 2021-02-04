@@ -17,15 +17,18 @@ export class ClientsContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.clients$ = this.clientsService.getList();
-
+    this.reloadData();
   }
 
   deleteClient(id: number) {
     console.log(id);
     this.clientsService.deleteItem(id).subscribe(() => {
-      this.clients$ = this.clientsService.getList();
+      this.reloadData();
     });
+  }
+
+  reloadData() {
+    this.clients$ = this.clientsService.getList();
   }
 
 

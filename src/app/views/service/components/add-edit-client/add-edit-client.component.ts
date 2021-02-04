@@ -1,5 +1,6 @@
+import { ClientsService } from './../../../../core/services/clients.service';
 import { ClientInterface } from './../../../../core/interfaces/client.interface';
-import { Component, Inject, OnInit, OnChanges } from '@angular/core';
+import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
@@ -10,12 +11,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AddEditClientComponent implements OnInit {
 
+  @Output() public dataChanged: EventEmitter<void> = new EventEmitter();
+
   public dialogTitle: string;
   public dialogActionButtonTitle: string;
 
   constructor(
     public dialogRef: MatDialogRef<AddEditClientComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ClientInterface) {}
+    @Inject(MAT_DIALOG_DATA) public data: ClientInterface,
+    private clientsService: ClientsService) {}
 
   public ngOnInit(): void {
     if(this.data === null) {
@@ -27,9 +31,9 @@ export class AddEditClientComponent implements OnInit {
         lastName: '',
         address: '',
         email: '',
+        vehicles: []
       };
-    } else if(this.data)
-    {
+    } else if(this.data) {
       this.dialogTitle = 'Client ' + this.data.firstName;
       this.dialogActionButtonTitle = 'Update';
     }
@@ -41,5 +45,20 @@ export class AddEditClientComponent implements OnInit {
 
   public addOrUpdateClient(data: ClientInterface) {
     console.log('data', data);
+
+    if (data.id) {
+      this.clientsService.updateItem(data.id, data).subscribe(() => {
+        console.log('success');
+        this.dataChanged.emit();
+        this.dialogRef.close();
+      });
+    } else {
+      this.clientsService.createItem(data).subscribe(() => {
+        console.log('created');
+        this.dataChanged.emit();
+        this.dialogRef.close();
+      });
+    }
+
   }
 }

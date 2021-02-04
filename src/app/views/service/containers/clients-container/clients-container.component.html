@@ -1,1 +1,4 @@
-<app-clients-table [clients]="clients$ | async" (deleteClientEvent)="deleteClient($event)"></app-clients-table>
+<app-clients-table [clients]="clients$ | async"
+  (deleteClientEvent)="deleteClient($event)"
+  (dataChanged)="reloadData();">
+</app-clients-table>
