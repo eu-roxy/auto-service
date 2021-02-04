@@ -1,6 +1,6 @@
 import { AddEditClientComponent } from './../add-edit-client/add-edit-client.component';
 import { ClientInterface } from './../../../../core/interfaces/client.interface';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ClientsTableComponent implements OnChanges {
 
   @Input() public clients: ClientInterface[] = [];
+  @Output() public deleteClientEvent: EventEmitter<number> = new EventEmitter();
 
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'actions'];
   dataSource = new MatTableDataSource();

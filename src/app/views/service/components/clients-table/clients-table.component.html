@@ -40,12 +40,12 @@
             </button>
           </div>
           <div class="example-button-container">
-            <button mat-mini-fab color="primary" aria-label="Edit client" (click)="openDialog(element)">
+            <button mat-mini-fab color="primary" aria-label="Edit client" (click)="openDialog(element);">
               <mat-icon>edit</mat-icon>
             </button>
           </div>
           <div class="example-button-container">
-            <button mat-mini-fab color="warn" aria-label="Delete client">
+            <button mat-mini-fab color="warn" aria-label="Delete client" (click)="deleteClientEvent.emit(element.id);">
               <mat-icon>delete</mat-icon>
             </button>
           </div>

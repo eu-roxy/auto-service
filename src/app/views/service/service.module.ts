@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { AddEditClientComponent } from './components/add-edit-client/add-edit-client.component';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +12,7 @@ import { DashboardContainerComponent } from './containers/dashboard-container/da
 import { ClientsTableComponent } from './components/clients-table/clients-table.component';
 import { ClientsContainerComponent } from './containers/clients-container/clients-container.component';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { FormsModule } from '@angular/forms';
     AddEditClientComponent
   ],
   imports: [
+    CommonModule,
     FormsModule,
+    HttpClientModule,
     MatTableModule,
     MatInputModule,
     MatIconModule,
