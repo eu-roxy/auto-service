@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { ServiceModule } from './views/service/service.module';
+import { AuthModule } from './views/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ServiceModule } from './views/service/service.module';
     BrowserAnimationsModule,
     SharedModule,
     ServiceModule,
+    AuthModule,
     CoreServices
   ],
   providers: [],

@@ -1,14 +1,17 @@
+import { AuthGuard } from './core/guard/auth.guard';
 import { VehiclesContainerComponent } from './views/service/containers/vehicles-container/vehicles-container.component';
 import { ClientsContainerComponent } from './views/service/containers/clients-container/clients-container.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from './shared/layout/base/base.component';
 import { DashboardContainerComponent } from './views/service/containers/dashboard-container/dashboard-container.component';
+import { LoginComponent } from './views/auth/components/login/login.component';
 
 const routes: Routes = [
   {
     path: 'pages',
     component: BaseComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -25,6 +28,10 @@ const routes: Routes = [
       // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: '**',
