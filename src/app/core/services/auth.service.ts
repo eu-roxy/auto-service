@@ -20,6 +20,7 @@ export class AuthService extends BaseService<UserInterface> {
     localStorage.removeItem('user_id');
     localStorage.removeItem('user_email');
     localStorage.removeItem('user_password');
+    this.globalRegistry.loggedUser = null;
   }
 
   public login(email: string, password: string): Observable<UserInterface> {
