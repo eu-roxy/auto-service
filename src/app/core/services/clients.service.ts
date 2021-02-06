@@ -4,9 +4,7 @@ import { ClientInterface } from './../interfaces/client.interface';
 import { BaseService } from './base.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientsService extends BaseService<ClientInterface> {
 
   constructor(public http: HttpClient) {

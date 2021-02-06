@@ -22,14 +22,10 @@ export class LoginComponent {
 
   public submit(): void {
     if (this.form.valid) {
-      console.log('valid');
-
-      console.log(this.form.value);
       let email: string = this.form.value['email'];
       let password: string = this.form.value['password'];
 
       this.authService.login(email, password).subscribe((response: UserInterface) => {
-        console.log(response);
         if (!response) {
           this.error = 'Email or password were incorrect!';
         } else {

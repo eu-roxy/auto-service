@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
@@ -58,9 +58,11 @@ export class BaseService<T> {
   }
 
   // Get data
-  getList(): Observable<T[]> {
+  getList(params?: Object): Observable<T[]> {
     return this.http
-      .get<T[]>(this.base_path)
+      .get<T[]>(this.base_path, {
+        params: this.createParams(params)
+      })
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -85,5 +87,26 @@ export class BaseService<T> {
         retry(2),
         catchError(this.handleError)
       )
+  }
+
+  // Create query params helper function
+  createParams(params: any): HttpParams {
+    const paramsClone = Object.assign({}, params);
+
+    const paramsObject: {
+      [param: string]: string | ReadonlyArray<string>;
+    } = {};
+
+    if(paramsClone !== undefined && paramsClone !== null) {
+      Object.keys(paramsClone).map((key: string) => {
+        if(paramsClone[key] !== null && paramsClone[key] !== undefined && paramsClone[key] !== '') {
+          paramsObject[key] = String(paramsClone[key]);
+        }
+      });
+    }
+
+    return new HttpParams({
+      fromObject: paramsObject
+    });
   }
 }
