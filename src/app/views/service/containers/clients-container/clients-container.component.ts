@@ -31,15 +31,7 @@ export class ClientsContainerComponent implements OnInit {
   }
 
   reloadData() {
-    setTimeout(() => {
-      let params = {};
-      if (this.globalRegistry.loggedUser.role === UserRole.MECHANIC) {
-        params['userId'] = this.globalRegistry.loggedUser.id;
-      }
-
-      this.clients$ = this.clientsService.getList(params);
-    });
-
+      this.clients$ = this.clientsService.getList();
   }
 
 

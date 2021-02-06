@@ -1,3 +1,4 @@
+import { GlobalRegistryService } from './core/services/global-registry.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'auto-service';
+
+  constructor(private globalRegistry: GlobalRegistryService) {
+  }
+
 }
