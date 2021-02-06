@@ -1,12 +1,39 @@
 // server > filldata.js
+const { fake } = require('faker');
 const faker = require('faker');
 
 const database = {
-  clients: []
+  clients: [],
+  users: []
 };
 
+// Set the starting ID for vehicles
 let vehicleId = 1;
 
+// Array with user roles (currently stored as string)
+let userRoles = ['Admin', 'Mecanic']
+
+
+/**
+ * Create users
+ */
+for (let i = 1; i <= 5; i++) {
+  database.users.push({
+    id: i,
+    firstName: faker.name.findName(),
+    lastName: faker.name.findName(),
+    email: faker.internet.email(),
+    password: faker.internet.password(),
+    address: faker.address.streetAddress(),
+    imageUrl: faker.image.avatar(),
+    role: faker.random.arrayElement(userRoles)
+  });
+}
+
+
+/**
+ * Create Clients
+ */
 for (let i = 1; i <= 30; i++) {
   database.clients.push({
     id: i,
@@ -15,10 +42,15 @@ for (let i = 1; i <= 30; i++) {
     email: faker.internet.email(),
     address: faker.address.streetAddress(),
     imageUrl: faker.image.avatar(),
-    vehicles: getVehicles()
+    vehicles: getVehicles(),
+    userId: faker.random.arrayElement(database.users).id
   });
 }
 
+
+/**
+ * Helper function for generating a list of vehicles and return it
+ */
 function getVehicles() {
   let vehicles = [];
 
