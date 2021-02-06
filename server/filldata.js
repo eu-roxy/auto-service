@@ -7,7 +7,7 @@ const database = {
 
 let vehicleId = 1;
 
-for (let i = 1; i <= 20; i++) {
+for (let i = 1; i <= 30; i++) {
   database.clients.push({
     id: i,
     firstName: faker.name.findName(),
@@ -28,7 +28,9 @@ function getVehicles() {
       model: faker.commerce.productName(),
       year: faker.random.number(),
       km: faker.random.number(),
-      image: faker.image.imageUrl()
+      image: faker.image.imageUrl(),
+      brand: faker.company.companyName(),
+      color: faker.internet.color()
     });
     vehicleId = vehicleId + 1;
   }
