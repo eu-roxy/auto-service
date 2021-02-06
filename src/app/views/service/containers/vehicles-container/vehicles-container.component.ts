@@ -1,3 +1,4 @@
+import { VehiclesService } from './../../../../core/services/vehicles.service';
 import { ClientsService } from './../../../../core/services/clients.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,9 @@ export class VehiclesContainerComponent implements OnInit {
 
   public client$: Observable<ClientInterface>;
 
-  constructor(private router: ActivatedRoute, private clientsService: ClientsService) {
+  constructor(private router: ActivatedRoute,
+    private clientsService: ClientsService,
+    private vehcileService: VehiclesService) {
 
   }
 
@@ -24,6 +27,10 @@ export class VehiclesContainerComponent implements OnInit {
         this.client$ = this.clientsService.getItem(params['clientId']);
       }
     });
+  }
+
+  public reloadData(): void {
+    console.log('in reload data');
   }
 
 }

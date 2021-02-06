@@ -4,3 +4,16 @@
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
+
+.add-button-container {
+  float: right;
+  padding: 2px 8px 4px 4px;
+  position: relative;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 120px;
+  padding-bottom: 25px;
+}

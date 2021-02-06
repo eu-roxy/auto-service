@@ -44,8 +44,6 @@ export class AddEditClientComponent implements OnInit {
   }
 
   public addOrUpdateClient(data: ClientInterface) {
-    console.log('data', data);
-
     if (data.id) {
       this.clientsService.updateItem(data.id, data).subscribe(() => {
         console.log('success');
@@ -53,12 +51,17 @@ export class AddEditClientComponent implements OnInit {
         this.dialogRef.close();
       });
     } else {
+      this.data.id = this.generateUniqId();
       this.clientsService.createItem(data).subscribe(() => {
         console.log('created');
         this.dataChanged.emit();
         this.dialogRef.close();
       });
     }
-
   }
+
+  private generateUniqId(): number{
+    return Math.floor(Math.random() * 100)
+  };
+
 }

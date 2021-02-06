@@ -1,1 +1,3 @@
-<app-vehicles-list [client]="client$ | async"></app-vehicles-list>
+<app-vehicles-list [client]="client$ | async"
+  (dataChanged)="reloadData()">
+</app-vehicles-list>

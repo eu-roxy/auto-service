@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>{{ dialogTitle }}</h1>
+
+<div mat-dialog-content>
+  <img *ngIf="data.id" [src]="data.image" alt="{{ data.model }}" width="100px" height="100px">
+  <mat-form-field class="row-container">
+    <mat-label>Model</mat-label>
+    <input matInput type="text" [(ngModel)]="data.model">
+  </mat-form-field>
+  <mat-form-field class="row-container">
+    <mat-label>Year</mat-label >
+    <input matInput type="number" [(ngModel)]="data.year">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Km</mat-label>
+    <input matInput type="number" [(ngModel)]="data.km">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button  cdkFocusInitial (click)="addOrUpdateVehicle(data)">{{ dialogActionButtonTitle }}</button>
+</div>
