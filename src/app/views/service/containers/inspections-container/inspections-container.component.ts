@@ -1,7 +1,8 @@
+import { takeUntil } from 'rxjs/operators';
 import { GlobalRegistryService } from './../../../../core/services/global-registry.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 import { InspectionsService } from './../../../../core/services/inspections.service';
 import { InspectionInterface } from './../../../../core/interfaces/inspection.interface';
@@ -11,9 +12,11 @@ import { InspectionInterface } from './../../../../core/interfaces/inspection.in
 @Component({
   templateUrl: './inspections-container.component.html'
 })
-export class InspectionsContainerComponent {
+export class InspectionsContainerComponent implements OnInit, OnDestroy{
 
   public inspections$: Observable<InspectionInterface[]>;
+
+  private destroyNotifier: Subject<void> = new Subject<void>();
 
   constructor(private route: ActivatedRoute,
     private inspectionsService: InspectionsService,
@@ -22,7 +25,9 @@ export class InspectionsContainerComponent {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
+    this.route.params
+    .pipe(takeUntil(this.destroyNotifier))
+    .subscribe((params: Params) => {
       console.log(params);
       if (params['vehicleId']) {
         this.globalRegistryService.currentVehicleId = params['vehicleId'];
@@ -31,9 +36,16 @@ export class InspectionsContainerComponent {
     });
   }
 
+  ngOnDestroy() {
+    this.destroyNotifier.next();
+    this.destroyNotifier.complete();
+  }
+
   deleteInspection(id: number) {
     console.log(id);
-    this.inspectionsService.deleteItem(id).subscribe(() => {
+    this.inspectionsService.deleteItem(id)
+    .pipe(takeUntil(this.destroyNotifier))
+    .subscribe(() => {
       this.reloadData();
     });
   }

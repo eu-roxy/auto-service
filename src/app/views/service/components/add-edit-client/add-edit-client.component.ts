@@ -1,6 +1,8 @@
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { ClientsService } from './../../../../core/services/clients.service';
 import { ClientInterface } from './../../../../core/interfaces/client.interface';
-import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Inject, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
@@ -9,12 +11,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './add-edit-client.component.html',
   styleUrls: ['./add-edit-client.component.scss']
 })
-export class AddEditClientComponent implements OnInit {
+export class AddEditClientComponent implements OnInit, OnDestroy {
 
   @Output() public dataChanged: EventEmitter<void> = new EventEmitter();
 
   public dialogTitle: string;
   public dialogActionButtonTitle: string;
+
+  private destroyNotifier: Subject<void> = new Subject<void>();
 
   constructor(
     public dialogRef: MatDialogRef<AddEditClientComponent>,
@@ -38,20 +42,29 @@ export class AddEditClientComponent implements OnInit {
     }
   }
 
+  public ngOnDestroy(): void {
+    this.destroyNotifier.next();
+    this.destroyNotifier.complete();
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   public addOrUpdateClient(data: ClientInterface) {
     if (data.id) {
-      this.clientsService.updateItem(data.id, data).subscribe(() => {
+      this.clientsService.updateItem(data.id, data)
+      .pipe(takeUntil(this.destroyNotifier))
+      .subscribe(() => {
         console.log('success');
         this.dataChanged.emit();
         this.dialogRef.close();
       });
     } else {
       this.data.id = new Date().getTime();
-      this.clientsService.createItem(data).subscribe(() => {
+      this.clientsService.createItem(data)
+      .pipe(takeUntil(this.destroyNotifier))
+      .subscribe(() => {
         console.log('created');
         this.dataChanged.emit();
         this.dialogRef.close();

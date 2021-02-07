@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Subject } from 'rxjs';
+import { Component, EventEmitter, Input, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddEditInspectionsComponent } from '../add-edit-inspections/add-edit-inspections.component';
 
 import { InspectionInterface } from './../../../../core/interfaces/inspection.interface';
+import { takeUntil } from 'rxjs/operators';
 
 
 
@@ -12,7 +14,7 @@ import { InspectionInterface } from './../../../../core/interfaces/inspection.in
   templateUrl: './inspections-list.component.html',
   styleUrls: ['./inspections-list.component.scss']
 })
-export class InspectionsListComponent {
+export class InspectionsListComponent implements OnDestroy{
 
   @Input() inspections: InspectionInterface[] = [];
 
@@ -21,6 +23,8 @@ export class InspectionsListComponent {
 
   displayedColumns: string[] = ['id', 'date', 'cost', 'notes', 'actions'];
   dataSource = new MatTableDataSource();
+
+  private destroyNotifier: Subject<void> = new Subject<void>();
 
   constructor (public dialog: MatDialog) {
   }
@@ -31,12 +35,19 @@ export class InspectionsListComponent {
     }
   }
 
+  ngOnDestroy() {
+    this.destroyNotifier.next();
+    this.destroyNotifier.complete();
+  }
+
   openDialog(inspection?: InspectionInterface): void {
     const dialogRef = this.dialog.open(AddEditInspectionsComponent, {
       width: '500px',
       data: inspection ? inspection : null
     });
-    dialogRef.componentInstance.dataChanged.subscribe(() => {
+    dialogRef.componentInstance.dataChanged
+    .pipe(takeUntil(this.destroyNotifier))
+    .subscribe(() => {
       this.dataChanged.emit();
     });
   }

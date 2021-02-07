@@ -1,3 +1,4 @@
 <app-inspections-list [inspections]="inspections$ | async"
+  (dataChanged)="reloadData()"
   (deleteInspectionEvent)="deleteInspection($event);">
 </app-inspections-list>

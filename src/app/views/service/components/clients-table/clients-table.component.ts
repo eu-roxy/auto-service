@@ -1,6 +1,8 @@
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { AddEditClientComponent } from './../add-edit-client/add-edit-client.component';
 import { ClientInterface } from './../../../../core/interfaces/client.interface';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -11,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './clients-table.component.html',
   styleUrls: ['./clients-table.component.scss']
 })
-export class ClientsTableComponent implements OnChanges {
+export class ClientsTableComponent implements OnChanges, OnDestroy {
 
   @Input() public clients: ClientInterface[] = [];
   @Output() public deleteClientEvent: EventEmitter<number> = new EventEmitter();
@@ -19,6 +21,8 @@ export class ClientsTableComponent implements OnChanges {
 
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'actions'];
   dataSource = new MatTableDataSource();
+
+  private destroyNotifier: Subject<void> = new Subject<void>();
 
   constructor (public dialog: MatDialog) {
   }
@@ -29,12 +33,19 @@ export class ClientsTableComponent implements OnChanges {
     }
   }
 
+  ngOnDestroy() {
+    this.destroyNotifier.next();
+    this.destroyNotifier.complete();
+  }
+
   openDialog(client?: ClientInterface): void {
     const dialogRef = this.dialog.open(AddEditClientComponent, {
       width: '500px',
       data: client ? client : null
     });
-    dialogRef.componentInstance.dataChanged.subscribe(() => {
+    dialogRef.componentInstance.dataChanged
+    .pipe(takeUntil(this.destroyNotifier))
+    .subscribe(() => {
       this.dataChanged.emit();
     });
   }

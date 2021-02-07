@@ -1,38 +1,31 @@
 <div class="row">
   <div class="col-xl-3 col-md-6">
     <div class="card text-white mb-4" [ngClass]="'bg-primary'">
-      <div class="card-body">Clients ({{clientsNumber}})</div>
-      <div class="card-footer d-flex align-items-center justify-content-between">
-          <a class="small text-white stretched-link" routerLink="/pages/clients">View Details</a>
-          <div class="small text-white"><mat-icon>list</mat-icon></div>
+      <div class="card-body d-flex align-items-center justify-content-between" >
+        <a class="text-white stretched-link" routerLink="/pages/clients">Clients ({{clientsNumber}})</a>
+        <div class="text-white"><mat-icon>list</mat-icon></div>
       </div>
     </div>
   </div>
   <div class="col-xl-3 col-md-6">
     <div class="card text-white mb-4" [ngClass]="'bg-info'">
-      <div class="card-body">Registered Cars ({{registeredCars}})</div>
-        <div class="card-footer d-flex align-items-center justify-content-between">
-            <a class="small text-white stretched-link">View Details</a>
-            <div class="small text-white"><mat-icon>home</mat-icon></div>
-        </div>
+      <div class="card-body">
+          <a class="text-white stretched-link">Registered Cars ({{registeredCars}})</a>
+      </div>
     </div>
   </div>
   <div class="col-xl-3 col-md-6">
     <div class="card text-white mb-4" [ngClass]="'bg-primary'">
-      <div class="card-body">Total inspections ({{inspections}})</div>
-        <div class="card-footer d-flex align-items-center justify-content-between">
-            <a class="small text-white stretched-link">View Details</a>
-            <div class="small text-white"><mat-icon>home</mat-icon></div>
-        </div>
+      <div class="card-body">
+        <a class="text-white stretched-link">Total inspections ({{inspections}})</a>
+      </div>
     </div>
   </div>
   <div class="col-xl-3 col-md-6">
     <div class="card text-white mb-4" [ngClass]="'bg-primary'">
-      <div class="card-body">Total costs  ~ {{totalCosts | currency:'EUR'}}</div>
-        <div class="card-footer d-flex align-items-center justify-content-between">
-            <a class="small text-white stretched-link">View Details</a>
-            <div class="small text-white"><mat-icon>home</mat-icon></div>
-        </div>
+      <div class="card-body">
+        <a class="text-white stretched-link">Total costs  ~ {{totalCosts | currency:'EUR'}}</a>
+      </div>
     </div>
   </div>
 </div>

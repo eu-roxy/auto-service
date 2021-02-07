@@ -8,9 +8,6 @@ const database = {
   inspections: []
 };
 
-// Set the starting ID for vehicles
-let vehicleId = 1;
-
 // Array with user roles (currently stored as string)
 let userRoles = ['Admin', 'Mecanic']
 
