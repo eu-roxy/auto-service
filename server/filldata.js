@@ -1,10 +1,10 @@
-// server > filldata.js
-const { fake } = require('faker');
+//  server > filldata.js
 const faker = require('faker');
 
 const database = {
   clients: [],
-  users: []
+  users: [],
+  vehicles: []
 };
 
 // Set the starting ID for vehicles
@@ -42,32 +42,26 @@ for (let i = 1; i <= 30; i++) {
     email: faker.internet.email(),
     address: faker.address.streetAddress(),
     imageUrl: faker.image.avatar(),
-    vehicles: getVehicles(),
     userId: faker.random.arrayElement(database.users).id
   });
 }
 
 
 /**
- * Helper function for generating a list of vehicles and return it
+ * Create Vehicles
  */
-function getVehicles() {
-  let vehicles = [];
-
-  for (let j = 1; j <= 3; j++) {
-    vehicles.push({
-      id: vehicleId,
-      model: faker.commerce.productName(),
-      year: faker.random.number(),
-      km: faker.random.number(),
-      image: faker.image.imageUrl(),
-      brand: faker.company.companyName(),
-      color: faker.internet.color()
-    });
-    vehicleId = vehicleId + 1;
-  }
-
-  return vehicles;
+for(let i = 1; i<=30; i++) {
+  database.vehicles.push({
+    id: i,
+    model: faker.commerce.productName(),
+    year: faker.random.number(),
+    km: faker.random.number(),
+    image: faker.image.imageUrl(),
+    brand: faker.company.companyName(),
+    color: faker.internet.color(),
+    clientId: faker.random.arrayElement(database.clients).id,
+  })
 }
+
 
 console.log(JSON.stringify(database));
