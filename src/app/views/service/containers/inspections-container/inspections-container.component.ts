@@ -1,3 +1,4 @@
+import { GlobalRegistryService } from './../../../../core/services/global-registry.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -13,9 +14,10 @@ import { InspectionInterface } from './../../../../core/interfaces/inspection.in
 export class InspectionsContainerComponent {
 
   public inspections$: Observable<InspectionInterface[]>;
-  public vehicleId: string;
 
-  constructor(private route: ActivatedRoute, private inspectionsService: InspectionsService) {
+  constructor(private route: ActivatedRoute,
+    private inspectionsService: InspectionsService,
+    private globalRegistryService: GlobalRegistryService) {
 
   }
 
@@ -23,7 +25,7 @@ export class InspectionsContainerComponent {
     this.route.params.subscribe((params: Params) => {
       console.log(params);
       if (params['vehicleId']) {
-        this.vehicleId = params['vehicleId'];
+        this.globalRegistryService.currentVehicleId = params['vehicleId'];
         this.reloadData();
       }
     });
@@ -38,7 +40,7 @@ export class InspectionsContainerComponent {
 
   reloadData() {
     this.inspections$ = this.inspectionsService.getList({
-      vehicleId: this.vehicleId
+      vehicleId: this.globalRegistryService.currentVehicleId
     });
   }
 }

@@ -7,6 +7,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -18,6 +21,7 @@ import { VehiclesContainerComponent } from './containers/vehicles-container/vehi
 import { AddEditVehicleComponent } from './components/add-edit-vehicle/add-edit-vehicle.component';
 import { InspectionsListComponent } from './components/inspections-list/inspections-list.component';
 import { InspectionsContainerComponent } from './containers/inspections-container/inspections-container.component';
+import { AddEditInspectionsComponent } from './components/add-edit-inspections/add-edit-inspections.component';
 
 
 @NgModule({
@@ -29,7 +33,8 @@ import { InspectionsContainerComponent } from './containers/inspections-containe
     VehiclesListComponent,
     AddEditVehicleComponent,
     InspectionsContainerComponent,
-    InspectionsListComponent
+    InspectionsListComponent,
+    AddEditInspectionsComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +46,10 @@ import { InspectionsContainerComponent } from './containers/inspections-containe
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
   providers: []
 })

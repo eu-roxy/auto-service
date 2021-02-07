@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{ dialogTitle }}</h1>
+
+<div mat-dialog-content>
+  <mat-form-field class="row-container">
+    <mat-label>Date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="data.date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Cost</mat-label>
+    <input matInput type="text" [(ngModel)]="data.cost">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Notes</mat-label>
+    <textarea matInput [(ngModel)]="data.notes"></textarea>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button  cdkFocusInitial (click)="addOrUpdateInspection(data)">{{ dialogActionButtonTitle }}</button>
+</div>

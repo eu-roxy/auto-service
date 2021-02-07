@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { AddEditInspectionsComponent } from '../add-edit-inspections/add-edit-inspections.component';
 
 import { InspectionInterface } from './../../../../core/interfaces/inspection.interface';
 
@@ -16,7 +17,7 @@ export class InspectionsListComponent {
   @Input() inspections: InspectionInterface[] = [];
 
   @Output() public deleteInspectionEvent: EventEmitter<number> = new EventEmitter();
-  // @Output() public dataChanged: EventEmitter<void> = new EventEmitter();
+  @Output() public dataChanged: EventEmitter<void> = new EventEmitter();
 
   displayedColumns: string[] = ['id', 'date', 'cost', 'notes', 'actions'];
   dataSource = new MatTableDataSource();
@@ -31,13 +32,13 @@ export class InspectionsListComponent {
   }
 
   openDialog(inspection?: InspectionInterface): void {
-    // const dialogRef = this.dialog.open(AddEditClientComponent, {
-    //   width: '500px',
-    //   data: client ? client : null
-    // });
-    // dialogRef.componentInstance.dataChanged.subscribe(() => {
-    //   this.dataChanged.emit();
-    // });
+    const dialogRef = this.dialog.open(AddEditInspectionsComponent, {
+      width: '500px',
+      data: inspection ? inspection : null
+    });
+    dialogRef.componentInstance.dataChanged.subscribe(() => {
+      this.dataChanged.emit();
+    });
   }
 
   applyFilter(event: Event) {

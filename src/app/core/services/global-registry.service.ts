@@ -8,5 +8,5 @@ import { UserInterface } from './../interfaces/user.interface';
 export class GlobalRegistryService {
   public loggedUser: UserInterface;
   public currentClientId: number;
-
+  public currentVehicleId: number;
 }
