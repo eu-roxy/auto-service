@@ -1,11 +1,7 @@
-import { GlobalRegistryService } from './../../../../core/services/global-registry.service';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ClientsService } from './../../../../core/services/clients.service';
 import { ClientInterface } from './../../../../core/interfaces/client.interface';
-import { map } from 'rxjs/operators';
-import { UserRole } from 'src/app/core/enums/user-roles.enum';
 
 
 @Component({
@@ -16,8 +12,7 @@ export class ClientsContainerComponent implements OnInit {
 
   public clients$: Observable<ClientInterface[]>;
 
-  constructor (private clientsService: ClientsService,
-               private globalRegistry: GlobalRegistryService) {
+  constructor (private clientsService: ClientsService) {
   }
 
   ngOnInit() {

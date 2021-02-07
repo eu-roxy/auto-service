@@ -1,18 +1,15 @@
-
-
-<div class="container" *ngIf="client && client.vehicles">
-
-  <div class="row">
-    <h2 class="text-center">{{ client.firstName }} {{ client.lastName }} have {{ client.vehicles.length }} vehicles</h2>
-    <div class="example-button-container add-button-container">
-      <button mat-mini-fab color="primary" aria-label="Add vehicle" (click)="openDialog()">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
+<div class="row">
+  <h2 class="text-center text-alignment">Number of vehicles {{ vehicles?.length }}</h2>
+  <div class="example-button-container add-button-container">
+    <button mat-mini-fab color="primary" aria-label="Add vehicle" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
+</div>
 
+<div class="container" *ngIf="vehicles && vehicles.length > 0">
   <div class="row">
-    <ng-template ngFor [ngForOf]="client.vehicles" let-vehicle>
+    <ng-template ngFor [ngForOf]="vehicles" let-vehicle>
         <div class="col-md-4">
           <mat-card>
             <mat-card-header>
@@ -28,7 +25,7 @@
             </mat-card-content>
             <mat-card-actions>
               <button mat-button color="primary" (click)="openDialog(vehicle);">EDIT</button>
-              <button mat-button color="warn">DELETE</button>
+              <button mat-button color="warn" (click)="deleteVehicleEvent.emit(vehicle.id)">DELETE</button>
             </mat-card-actions>
           </mat-card>
         </div>

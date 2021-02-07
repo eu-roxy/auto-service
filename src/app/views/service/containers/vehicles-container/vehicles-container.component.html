@@ -1,3 +1,4 @@
-<app-vehicles-list [client]="client$ | async"
-  (dataChanged)="reloadData()">
+<app-vehicles-list [vehicles]="vehicle$ | async"
+  (dataChanged)="reloadData()"
+  (deleteVehicleEvent)="deleteVehicle($event)">
 </app-vehicles-list>

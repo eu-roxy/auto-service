@@ -6,5 +6,4 @@ export interface ClientInterface {
   id: number;
   email: string;
   address: string;
-  vehicles: VehicleInterface[];
 }

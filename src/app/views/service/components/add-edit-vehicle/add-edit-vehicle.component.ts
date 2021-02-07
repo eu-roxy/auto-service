@@ -1,3 +1,4 @@
+import { GlobalRegistryService } from './../../../../core/services/global-registry.service';
 import { VehiclesService } from './../../../../core/services/vehicles.service';
 import { VehicleInterface } from './../../../../core/interfaces/vehicle.interface';
 import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
@@ -19,7 +20,8 @@ export class AddEditVehicleComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddEditVehicleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: VehicleInterface,
-    public vehicleService: VehiclesService) {}
+    private vehicleService: VehiclesService,
+    private globalRegistryService: GlobalRegistryService) {}
 
   public ngOnInit(): void {
     if(this.data === null) {
@@ -30,6 +32,7 @@ export class AddEditVehicleComponent implements OnInit {
         model: '',
         year: null,
         km: null,
+        clientId: null,
         image: ''
       };
     } else if(this.data) {
@@ -43,7 +46,6 @@ export class AddEditVehicleComponent implements OnInit {
   }
 
   public addOrUpdateVehicle(data: VehicleInterface): void {
-    console.log('in create/update', data);
     if(data.id) {
       this.vehicleService.updateItem(data.id, data).subscribe(() => {
         console.log('success');
@@ -51,8 +53,9 @@ export class AddEditVehicleComponent implements OnInit {
         this.dialogRef.close();
       });
     } else {
-      this.data.id = this.generateUniqId();
-      this.data.image = 'https://media3.s-nbcnews.com/j/newscms/2019_41/3047866/191010-japan-stalker-mc-1121_06b4c20bbf96a51dc8663f334404a899.fit-760w.JPG';
+      this.data.id = new Date().getTime();
+      this.data.image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/BMW_G20_IMG_0167.jpg/1200px-BMW_G20_IMG_0167.jpg';
+      this.data.clientId = this.globalRegistryService.currentClientId;
       this.vehicleService.createItem(data).subscribe(() => {
         console.log('created');
         this.dataChanged.emit();
@@ -60,9 +63,5 @@ export class AddEditVehicleComponent implements OnInit {
       })
     }
   }
-
-  private generateUniqId(): number{
-    return Math.floor(Math.random() * 100)
-  };
 
 }

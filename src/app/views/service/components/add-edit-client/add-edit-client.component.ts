@@ -30,8 +30,7 @@ export class AddEditClientComponent implements OnInit {
         firstName: '',
         lastName: '',
         address: '',
-        email: '',
-        vehicles: []
+        email: ''
       };
     } else if(this.data) {
       this.dialogTitle = 'Client ' + this.data.firstName;
@@ -51,7 +50,7 @@ export class AddEditClientComponent implements OnInit {
         this.dialogRef.close();
       });
     } else {
-      this.data.id = this.generateUniqId();
+      this.data.id = new Date().getTime();
       this.clientsService.createItem(data).subscribe(() => {
         console.log('created');
         this.dataChanged.emit();
@@ -59,9 +58,5 @@ export class AddEditClientComponent implements OnInit {
       });
     }
   }
-
-  private generateUniqId(): number{
-    return Math.floor(Math.random() * 100)
-  };
 
 }
