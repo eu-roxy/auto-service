@@ -1,1 +1,3 @@
-<app-inspections-list></app-inspections-list>
+<app-inspections-list [inspections]="inspections$ | async"
+  (deleteInspectionEvent)="deleteInspection($event);">
+</app-inspections-list>
