@@ -4,7 +4,8 @@ const faker = require('faker');
 const database = {
   clients: [],
   users: [],
-  vehicles: []
+  vehicles: [],
+  inspections: []
 };
 
 // Set the starting ID for vehicles
@@ -60,6 +61,19 @@ for(let i = 1; i<=30; i++) {
     brand: faker.company.companyName(),
     color: faker.internet.color(),
     clientId: faker.random.arrayElement(database.clients).id,
+  })
+}
+
+/**
+ * Create Inspections
+ */
+for(let i = 1; i<=80; i++) {
+  database.inspections.push({
+    id: i,
+    date: faker.date.past(),
+    notes: faker.lorem.sentence(),
+    cost: faker.commerce.price(),
+    vehicleId: faker.random.arrayElement(database.vehicles).id,
   })
 }
 

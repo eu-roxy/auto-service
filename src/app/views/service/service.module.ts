@@ -10,7 +10,6 @@ import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardContainerComponent } from './containers/dashboard-container/dashboard-container.component';
 import { ClientsTableComponent } from './components/clients-table/clients-table.component';
@@ -19,6 +18,8 @@ import { AddEditClientComponent } from './components/add-edit-client/add-edit-cl
 import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.component';
 import { VehiclesContainerComponent } from './containers/vehicles-container/vehicles-container.component';
 import { AddEditVehicleComponent } from './components/add-edit-vehicle/add-edit-vehicle.component';
+import { InspectionsListComponent } from './components/inspections-list/inspections-list.component';
+import { InspectionsContainerComponent } from './containers/inspections-container/inspections-container.component';
 
 
 @NgModule({
@@ -30,7 +31,9 @@ import { AddEditVehicleComponent } from './components/add-edit-vehicle/add-edit-
     AddEditClientComponent,
     VehiclesContainerComponent,
     VehiclesListComponent,
-    AddEditVehicleComponent
+    AddEditVehicleComponent,
+    InspectionsContainerComponent,
+    InspectionsListComponent
   ],
   imports: [
     CommonModule,
