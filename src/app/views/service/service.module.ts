@@ -10,8 +10,6 @@ import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DashboardContainerComponent } from './containers/dashboard-container/dashboard-container.component';
 import { ClientsTableComponent } from './components/clients-table/clients-table.component';
 import { ClientsContainerComponent } from './containers/clients-container/clients-container.component';
 import { AddEditClientComponent } from './components/add-edit-client/add-edit-client.component';
@@ -24,8 +22,6 @@ import { InspectionsContainerComponent } from './containers/inspections-containe
 
 @NgModule({
   declarations: [
-    DashboardContainerComponent,
-    DashboardComponent,
     ClientsContainerComponent,
     ClientsTableComponent,
     AddEditClientComponent,

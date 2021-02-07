@@ -5,4 +5,6 @@ export interface VehicleInterface {
   year: number;
   km: number;
   image: string;
+  brand?: string;
+  color?: string;
 }

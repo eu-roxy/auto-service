@@ -6,8 +6,8 @@ import { InspectionsContainerComponent } from './views/service/containers/inspec
 import { VehiclesContainerComponent } from './views/service/containers/vehicles-container/vehicles-container.component';
 import { ClientsContainerComponent } from './views/service/containers/clients-container/clients-container.component';
 import { BaseComponent } from './shared/layout/base/base.component';
-import { DashboardContainerComponent } from './views/service/containers/dashboard-container/dashboard-container.component';
 import { LoginComponent } from './views/auth/components/login/login.component';
+import { DashboardContainerComponent } from './views/dashboard/containers/dashboard/dashboard-container.component';
 
 const routes: Routes = [
   {

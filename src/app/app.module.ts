@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { ServiceModule } from './views/service/service.module';
 import { AuthModule } from './views/auth/auth.module';
+import { DashboardModule } from './views/dashboard/dashboard.module';
 import { GlobalRegistryService } from './core/services/global-registry.service';
 import { CoreServices } from './core/core.services';
 
@@ -22,6 +23,7 @@ import { CoreServices } from './core/core.services';
     SharedModule,
     ServiceModule,
     AuthModule,
+    DashboardModule,
     CoreServices
   ],
   providers: [GlobalRegistryService],
