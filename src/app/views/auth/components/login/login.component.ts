@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { UserInterface } from './../../../../core/interfaces/user.interface';
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -12,15 +12,15 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnDestroy{
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public error: string;
 
   private destroyNotifier: Subject<void> = new Subject<void>();
 
   constructor(private authService: AuthService, private router: Router) {
-    this.form = new FormGroup({
-      email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl(''),
+    this.form = new UntypedFormGroup({
+      email: new UntypedFormControl('', [Validators.email, Validators.required]),
+      password: new UntypedFormControl(''),
     });
   }
 

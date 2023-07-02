@@ -117,5 +117,7 @@
       }
     }
   },
-  "defaultProject": "auto-service"
+  "cli": {
+    "analytics": "3fab4223-02d5-45fd-9f2b-80d0e0a1ce17"
+  }
 }
